@@ -2,6 +2,7 @@
 using AuditQualification.Models;
 using AuditQualification.Services.Arm;
 using AuditQualification.Services.GraphOperations;
+using Docusign.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
@@ -17,10 +18,12 @@ namespace AuditQualification.Controllers
         readonly ITokenAcquisition tokenAcquisition;
         private readonly IGraphApiOperations graphApiOperations;
         private readonly IArmOperations armOperations;
+        private IDocusignService _docusignService;
 
-        public HomeController(ITokenAcquisition tokenAcquisition,
-                              IGraphApiOperations graphApiOperations,
-                              IArmOperations armOperations)
+        public HomeController(IDocusignService docusignService,
+                                ITokenAcquisition tokenAcquisition,
+                                IGraphApiOperations graphApiOperations,
+                                IArmOperations armOperations)
         {
             this.tokenAcquisition = tokenAcquisition;
             this.graphApiOperations = graphApiOperations;
@@ -61,6 +64,10 @@ namespace AuditQualification.Controllers
 
         public ActionResult Sign(string id)
         {
+            byte[] buffer = System.IO.File.ReadAllBytes("Docs/R.11_Justification_for_Remote_Audit.pdf");
+            var doc = Convert.ToBase64String(buffer);
+            var envelopeId = _docusignService.CreateEnvelope(User.Identity.Name,User.Identity.Name,doc);
+            var redirectUrl = _docusignService.CreateRecipientView(User.Identity.Name, User.Identity.Name, envelopeId);
             return Redirect(redirectUrl);
         }
 

@@ -8,5 +8,6 @@ namespace AuditQualification.Service
         OAuth.UserInfo.Account Account { get; }
 
         string CreateEnvelope(EnvelopeDefinition envelope);
+        string CreateRecipientView(string envelopeId, RecipientViewRequest viewRequest);
     }
 }

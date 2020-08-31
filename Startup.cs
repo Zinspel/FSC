@@ -12,6 +12,7 @@ using AuditQualification.Infrastructure;
 using AuditQualification.Services.Arm;
 using AuditQualification.Services.GraphOperations;
 using AuditQualification.Service;
+using Docusign.Service;
 
 namespace AuditQualification
 {
@@ -42,6 +43,7 @@ namespace AuditQualification
             services.AddGraphService(Configuration);
             services.AddHttpClient<IArmOperations, ArmApiOperationService>();
             services.AddTransient<IDocusignClient, DocusignClient>();
+            services.AddTransient<IDocusignService, DocusignService>();
 
             services.AddControllersWithViews(options =>
             {
