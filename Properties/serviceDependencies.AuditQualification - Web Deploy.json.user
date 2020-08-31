@@ -1,0 +1,25 @@
+{
+  "dependencies": {},
+  "parameters": {
+    "AuditQualification.subscriptionId": {
+      "Type": "subscription",
+      "Value": "8c781592-372e-4410-9ef4-e3e9164414b5"
+    },
+    "AuditQualification.resourceGroupLocation": {
+      "Type": null,
+      "Value": "westeurope"
+    },
+    "subscriptionId": {
+      "Type": "subscription",
+      "Value": "8c781592-372e-4410-9ef4-e3e9164414b5"
+    },
+    "AuditQualification.resourceName": {
+      "Type": null,
+      "Value": "AuditQualification"
+    },
+    "AuditQualification.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "FSCHackathon"
+    }
+  }
+}

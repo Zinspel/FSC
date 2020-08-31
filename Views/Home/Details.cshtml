@@ -1,0 +1,97 @@
+﻿@section PageStyle{
+    <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css">
+    <style>
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+
+}
+@section Scripts{
+    <script src="https://js.arcgis.com/4.16/"></script>
+    <script>
+        require([
+            "esri/WebMap",
+            "esri/views/MapView"
+        ], function (WebMap, MapView) {
+
+            var webmap = new WebMap({
+                portalItem: {
+                    id: "a156a2ee360c46e5a70b5c6f7515712f"
+                }
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: webmap
+            });
+
+        });
+    </script>
+}
+<h1>@Model.Name</h1>
+<form>
+    <div class="form-group">
+        <label>Location</label>
+    </div>
+    <div class="form-group">
+        <label>Country</label>
+        <input class="form-control" type="text" placeholder="@Model.Location.Country" readonly>
+    </div>
+</form>
+<div class="col-lg-6">
+    <table>
+        <thead>
+            <tr>Location</tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Country</td>
+                <td>@Model.Location.Country</td>
+            </tr>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Locationrelated risks</h2>
+    <table>
+        <tr>
+            <td>COVID-19 Travel risk in score</td>
+            <td>@Model.Risks.COVID_19_riskscore</td>
+            <td>@Model.Risks.COVID_19_Flagged</td>
+        </tr>
+        <tr>
+            <td>Nearby deforestation area risk</td>
+            <td>@Model.Risks.DeforestationRisk</td>
+            <td>@Model.Risks.DeforestationRisk_Flagged</td>
+        </tr>
+        <tr>
+            <td>Corruption Perception index 2019</td>
+            <td>@Model.Risks.CorruptionIndexScore</td>
+            <td>@Model.Risks.CorruptionIndexScore_Flagged</td>
+        </tr>
+    </table>
+    <div class="input-group" style="margin-top:20px;width:100%;">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Comments</span>
+        </div>
+        <textarea class="form-control-lg" style="width: 100%;height:200px;" aria-label="Textarea"></textarea>
+    </div>
+</div>
+
+<div class="col-lg-6"><div id="viewDiv"></div></div>
+<div class="col-lg-12 ">
+    <a class="btn btn-success" href="Home/sign/@Model.ID">Sign in PDF</a>
+</div>
+<div class="col-lg-12" style="margin-top:20px;">
+        <button type="button" class="btn btn-success">Deny</button>
+        <button type="button" class="btn btn-success">Approve</button>
+</div>
+
+
+
+

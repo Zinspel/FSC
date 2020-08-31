@@ -1,0 +1,26 @@
+﻿@{ ViewData["Title"] = "Home Page"; }
+
+<h1>Companies</h1>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in Model.Companies)
+        {
+            <tr>
+                <th scope="row">@company.ID</th>
+                <td>@company.Name</td>
+                <td>@company.Date</td>
+                <td>
+                    <a href="~/Home/Details/@company.ID">details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
